@@ -1,5 +1,6 @@
-package com.example.econo_me;
 /*
+package com.example.econo_me;
+
 import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -46,7 +47,7 @@ public class Reminder {
         }
     }
 }
-*/
+
 
 import android.app.Notification;
 import android.support.v4.app.NotificationCompat;
@@ -87,3 +88,4 @@ public class Reminder {
 
     } // end of main
 }
+*/
