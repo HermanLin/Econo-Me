@@ -2,24 +2,29 @@
     "name": "Econo-Me",
     "version": "0.1",
     "description": "Finance Yourself!",
+    "permissions": ["tabs", "<all_urls>"],
     "manifest_version": 2,
+
+    "content_scripts": [{
+        "matches": ["<all_urls>"],
+        "js": ["content.js"]
+    }],
 
     "background": {
         "scripts": [
-
+            "background.js"
         ],
         "persistent": false
     },
 
-    "page_action": {
-        "default_popup": "popup.html",
+    "browser_action": {
         "default_icon": {
-            "16": "images/goteem16.png",
-            "48": ""
-        }
+            "16": "images/goteem16.png"
+        },
+        "default_popup": "popup.html",
+        "default_title": "Econo-Me"
     },
     "icons": {
-        "16": "images/goteem16.png",
-        "48": ""
+        "48": "images/goteem16.png"
     }
 }
