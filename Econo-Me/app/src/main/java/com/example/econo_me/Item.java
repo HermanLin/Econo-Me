@@ -1,4 +1,3 @@
-/*
 package com.example.econo_me;
 
 public class Item {
@@ -23,4 +22,3 @@ public class Item {
         return desc;
     }
 }
-*/

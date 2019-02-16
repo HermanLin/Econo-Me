@@ -1,18 +1,14 @@
 package com.example.econo_me;
-import android.annotation.SuppressLint;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.text.ParseException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.io.File;
-import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.util.Calendar;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class Update {
     public static Long getWaitTime(){
@@ -30,61 +26,107 @@ public class Update {
     }
 
     public static void scanPending(){
-        File file = new File("pending.csv");
-        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+        ArrayList<String> newPending = new ArrayList<>();
+        ArrayList<String> newReady = new ArrayList<>();
+        File pendingFile = new File("pending.csv");
+
+        try (BufferedReader br = new BufferedReader(new FileReader(pendingFile))) {
             String line;
             while ((line = br.readLine()) != null) {
                 // process the line.
                 String[] item = line.split(",");
-                //String name = item[0];
-                //String desc = item[1];
+                String name = item[0];
+                String desc = item[1];
                 String timeStr = item[2];
                 Long time = Long.parseLong(timeStr);
                 Long currDate = Calendar.getInstance().getTime().getTime();
                 currDate -= getWaitTime();
                 if (time > currDate){
-
+                    newReady.add(name + desc);
                 }
-
+                else{
+                    newPending.add(name + desc + timeStr);
+                }
+            }
+            PrintWriter pendingWriter = new PrintWriter(pendingFile);
+            for (String writeLine: newPending){
+                pendingWriter.print(writeLine);
+            }
+            FileWriter readyFile = new FileWriter("ready.csv", true);
+            PrintWriter readyWriter = new PrintWriter(readyFile);
+            for (String writeLine: newReady){
+                readyWriter.print(writeLine);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        /*
-        try{
-            FileReader reader = new FileReader(file);
-        }
-        catch(FileNotFoundException e){
-             try{
-                 file.createNewFile();
-             }
-             catch (IOException e2){
-                 System.out.println("something broke");
-             }
-        }
-        */
-
     }
 
     public static ArrayList<Item> viewPending(){
         scanPending();
 
-        ArrayList<Item> outlst = new ArrayList<Item>();
-        return outlst;
+        ArrayList<Item> outList = new ArrayList<>();
+        File pendingFile = new File("pending.csv");
+        try (BufferedReader br = new BufferedReader(new FileReader(pendingFile))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] item = line.split(",");
+                String name = item[0];
+                String desc = item[1];
+                
+                outList.add(new Item(name, desc));
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return outList;
     }
 
     public static ArrayList<Item> viewReady(){
         scanPending();
 
-        ArrayList<Item> outlst = new ArrayList<Item>();
-        return outlst;
+        scanPending();
+
+        ArrayList<Item> outList = new ArrayList<>();
+        File readyFile = new File("ready.csv");
+        try (BufferedReader br = new BufferedReader(new FileReader(readyFile))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] item = line.split(",");
+                String name = item[0];
+                String desc = item[1];
+
+                outList.add(new Item(name, desc));
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return outList;
     }
 
     public static ArrayList<Item> viewApproved(){
-        ArrayList<Item> outlst = new ArrayList<Item>();
-        return outlst;
+        ArrayList<Item> outList = new ArrayList<>();
+        File approvedFile = new File("approved.csv");
+        try (BufferedReader br = new BufferedReader(new FileReader(approvedFile))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] item = line.split(",");
+                String name = item[0];
+                String desc = item[1];
+
+                outList.add(new Item(name, desc));
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return outList;
     }
 }
