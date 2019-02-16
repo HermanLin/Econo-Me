@@ -14,12 +14,12 @@
     "page_action": {
         "default_popup": "popup.html",
         "default_icon": {
-            "16": "",
+            "16": "images/goteem16.png",
             "48": ""
         }
     },
     "icons": {
-        "16": "",
+        "16": "images/goteem16.png",
         "48": ""
     }
 }
