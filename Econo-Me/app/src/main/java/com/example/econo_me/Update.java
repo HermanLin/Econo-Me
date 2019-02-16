@@ -11,7 +11,7 @@ import java.io.FileWriter;
 import java.util.Calendar;
 
 public class Update {
-    public static Long getWaitTime(){
+    private static Long getWaitTime(){
         File file = new File("wait.txt");
         String line = "604800000"; //time defaults to 1 week if file not found
         try(BufferedReader br = new BufferedReader(new FileReader(file))){
@@ -21,11 +21,10 @@ public class Update {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Long time = Long.parseLong(line);
-        return time;
+        return Long.parseLong(line);
     }
 
-    public static void scanPending(){
+    private static void scanPending(){
         ArrayList<String> newPending = new ArrayList<>();
         ArrayList<String> newReady = new ArrayList<>();
         File pendingFile = new File("pending.csv");
