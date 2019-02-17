@@ -12,7 +12,7 @@ import java.util.Calendar;
 
 public class Database {
     private static Long getWaitTime(){
-        File file = new File("wait.txt");
+        File file = new File("data/data/com.example.econo_me/wait.txt");
         try {
             file.createNewFile();
         } catch (IOException e) {
@@ -32,7 +32,7 @@ public class Database {
     private static void scanPending(){
         ArrayList<String> newPending = new ArrayList<>();
         ArrayList<String> newReady = new ArrayList<>();
-        File pendingFile = new File("pending.csv");
+        File pendingFile = new File("data/data/com.example.econo_me/pending.csv");
         try {
             pendingFile.createNewFile();
         } catch (IOException e) {
@@ -60,13 +60,13 @@ public class Database {
             for (String writeLine: newPending){
                 pendingWriter.print(writeLine);
             }
-            File readyF = new File("ready.csv");
+            File readyF = new File("data/data/com.example.econo_me/ready.csv");
             try {
                 readyF.createNewFile();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            FileWriter readyFile = new FileWriter("ready.csv", true);
+            FileWriter readyFile = new FileWriter("data/data/com.example.econo_me/ready.csv", true);
 
             PrintWriter readyWriter = new PrintWriter(readyFile);
             for (String writeLine: newReady){
@@ -83,7 +83,7 @@ public class Database {
         scanPending();
 
         ArrayList<Item> outList = new ArrayList<>();
-        File pendingFile = new File("pending.csv");
+        File pendingFile = new File("data/data/com.example.econo_me/pending.csv");
         try (BufferedReader br = new BufferedReader(new FileReader(pendingFile))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -105,7 +105,7 @@ public class Database {
         scanPending();
 
         ArrayList<Item> outList = new ArrayList<>();
-        File readyFile = new File("ready.csv");
+        File readyFile = new File("data/data/com.example.econo_me/ready.csv");
         try (BufferedReader br = new BufferedReader(new FileReader(readyFile))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -125,7 +125,7 @@ public class Database {
 
     public static ArrayList<Item> viewApproved(){
         ArrayList<Item> outList = new ArrayList<>();
-        File approvedFile = new File("approved.csv");
+        File approvedFile = new File("data/data/com.example.econo_me/approved.csv");
         try (BufferedReader br = new BufferedReader(new FileReader(approvedFile))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -145,10 +145,10 @@ public class Database {
 
     public static void addItem(String name, String desc){
         try {
-            File pendingF = new File("pending.csv");
+            File pendingF = new File("data/data/com.example.econo_me/pending.csv");
             pendingF.createNewFile();
 
-            FileWriter pendingFile = new FileWriter("pending.csv", true);
+            FileWriter pendingFile = new FileWriter("data/data/com.example.econo_me/pending.csv", true);
             PrintWriter pendingWriter = new PrintWriter(pendingFile);
             Long currTime = Calendar.getInstance().getTime().getTime();
             String time = currTime.toString();
