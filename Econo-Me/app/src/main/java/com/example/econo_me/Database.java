@@ -10,7 +10,7 @@ import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.util.Calendar;
 
-public class Update {
+public class Database {
     private static Long getWaitTime(){
         File file = new File("wait.txt");
         String line = "604800000"; //time defaults to 1 week if file not found
