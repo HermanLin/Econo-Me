@@ -10,7 +10,8 @@ function buttonClicked(tab) {
         currentWindow: true
     }, function() {
         let info = {
-            currentUrl: tab.url
+            currentUrl: tab.url,
+            currentTitle: tab.title
         }
         console.log("url getted");
         chrome.tabs.sendMessage(tab.id, info);
@@ -21,12 +22,22 @@ function buttonClicked(tab) {
         type: 'popup',
         left: screen.width/2,
         top: screen.height/2,
-        width: 500,
-        height: 300
+        width: 300,
+        height: 200
     }, function(window) {
     });
     
     //console.log(tab);
 }
 
+function test(){
+    alert("tested");
+}
 
+document.addEventListener('DOMContentLoaded', function() {
+    var link = document.getElementById('addToWish');
+    // onClick's logic below:
+    link.addEventListener('click', function() {
+        test();
+    });
+});
