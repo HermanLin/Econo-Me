@@ -38,9 +38,9 @@ public class Update {
                 String desc = item[1];
                 String timeStr = item[2];
                 Long time = Long.parseLong(timeStr);
-                Long currDate = Calendar.getInstance().getTime().getTime();
-                currDate -= getWaitTime();
-                if (time > currDate){
+                Long currTime = Calendar.getInstance().getTime().getTime();
+                currTime -= getWaitTime();
+                if (time > currTime){
                     newReady.add(name + desc);
                 }
                 else{
@@ -127,5 +127,18 @@ public class Update {
             e.printStackTrace();
         }
         return outList;
+    }
+
+    public static void addItem(String name, String desc){
+        try {
+            FileWriter pendingFile = new FileWriter("pending.csv", true);
+            PrintWriter pendingWriter = new PrintWriter(pendingFile);
+            Long currTime = Calendar.getInstance().getTime().getTime();
+            String time = currTime.toString();
+            String line = name + "," + desc + "," + time;
+            pendingWriter.print(line);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
