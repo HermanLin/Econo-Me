@@ -7,15 +7,23 @@ function buttonClicked(tab) {
 
     chrome.tabs.query({
         active: true,
-        currentWindow: true,
-        //windowId: chrome.windows.WINDOW_ID_CURRENT
+        currentWindow: true
     }, function() {
         let info = {
-            currentUrl: tab.url,
-            currentId: tab.id
+            currentUrl: tab.url
         }
         console.log("url getted");
         chrome.tabs.sendMessage(tab.id, info);
+    });
+
+    chrome.windows.create({
+        url: 'popup.html',
+        type: 'popup',
+        left: screen.width/2,
+        top: screen.height/2,
+        width: 500,
+        height: 300
+    }, function(window) {
     });
     
     //console.log(tab);
