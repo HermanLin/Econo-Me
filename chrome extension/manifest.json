@@ -21,7 +21,6 @@
         "default_icon": {
             "16": "images/goteem16.png"
         },
-        "default_popup": "popup.html",
         "default_title": "Econo-Me"
     },
     "icons": {
