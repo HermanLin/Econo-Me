@@ -20,7 +20,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_main);
-        final Intent intent = new Intent(this, AddItemActivity.class);
+        final Intent addItemIntent = new Intent(this, AddItemActivity.class);
+        final Intent seeListIntent = new Intent(this, SeeListActivity.class);
         final ConstraintLayout constraintLayout = new ConstraintLayout(this);
         //RelativeLayout relativeLayout = new RelativeLayout(getApplicationContext());
         ViewGroup.LayoutParams layoutParams = new ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
@@ -58,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         addItemButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(intent);
+                startActivity(addItemIntent);
                 //AddItemActivity aia = new AddItemActivity();
                 //EditText textBox = new EditText(addItemButton.getContext());
                 //constraintLayout.addView(textBox);
@@ -67,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         seeItemsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startActivity(seeListIntent);
             }
         });
         settingsButton.setOnClickListener(new View.OnClickListener() {

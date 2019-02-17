@@ -38,7 +38,7 @@ public class AddItemActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String name = nameBox.getText().toString();
                 String desc = descBox.getText().toString();
-                //pass to leo's functions
+                Database.addItem(name,desc);
             }
         });
         submitButton.setTranslationX(600);
