@@ -13,6 +13,11 @@ import java.util.Calendar;
 public class Database {
     private static Long getWaitTime(){
         File file = new File("wait.txt");
+        try {
+            file.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         String line = "604800000"; //time defaults to 1 week if file not found
         try(BufferedReader br = new BufferedReader(new FileReader(file))){
             line = br.readLine();
@@ -28,7 +33,11 @@ public class Database {
         ArrayList<String> newPending = new ArrayList<>();
         ArrayList<String> newReady = new ArrayList<>();
         File pendingFile = new File("pending.csv");
-
+        try {
+            pendingFile.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         try (BufferedReader br = new BufferedReader(new FileReader(pendingFile))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -51,7 +60,14 @@ public class Database {
             for (String writeLine: newPending){
                 pendingWriter.print(writeLine);
             }
+            File readyF = new File("ready.csv");
+            try {
+                readyF.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             FileWriter readyFile = new FileWriter("ready.csv", true);
+
             PrintWriter readyWriter = new PrintWriter(readyFile);
             for (String writeLine: newReady){
                 readyWriter.print(writeLine);
@@ -86,8 +102,6 @@ public class Database {
     }
 
     public static ArrayList<Item> viewReady(){
-        scanPending();
-
         scanPending();
 
         ArrayList<Item> outList = new ArrayList<>();
@@ -131,6 +145,9 @@ public class Database {
 
     public static void addItem(String name, String desc){
         try {
+            File pendingF = new File("pending.csv");
+            pendingF.createNewFile();
+
             FileWriter pendingFile = new FileWriter("pending.csv", true);
             PrintWriter pendingWriter = new PrintWriter(pendingFile);
             Long currTime = Calendar.getInstance().getTime().getTime();
