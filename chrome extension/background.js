@@ -29,15 +29,3 @@ function buttonClicked(tab) {
     
     //console.log(tab);
 }
-
-function test(){
-    alert("tested");
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-    var link = document.getElementById('addToWish');
-    // onClick's logic below:
-    link.addEventListener('click', function() {
-        test();
-    });
-});
